@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <!-- <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"> -->
-    <link rel="stylesheet" href="{{url('/assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{url('/css/style.css')}}">
     <style></style>
 </head>
 
@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <form method="post" class="form">
+        <form action="{{url('/login/action')}}" method="post" class="form">
             <div class="container">
                 <label for="username"><b>Username</b></label>
                 <input id="username" class="form-content" type="text" placeholder="Enter Username" name="username"
@@ -37,7 +37,7 @@
 
             <input id="login-btn" type="submit" name="submit" value="LOGIN" />
 
-            <a href="#" id="register">Klik disini untuk mendaftar</a>
+            <a href="/register" id="register">Klik disini untuk mendaftar</a>
 
     </div>
 
