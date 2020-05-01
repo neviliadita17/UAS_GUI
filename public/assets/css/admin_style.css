@@ -280,7 +280,7 @@ html {
 
 /* Login Form */
 .login {
-    background: url('../../img/3568984.jpg');
+    background: url('3568984.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 150%;
@@ -561,7 +561,7 @@ a.btable {
 
 /* Tabel Data */
 .search_bar {
-    background-image: url('../../img/research.png');
+    background-image: url('research.png');
     background-position: 10px 10px;
     background-repeat: no-repeat;
     font-size: 15px;
@@ -746,7 +746,7 @@ select {
     position: absolute;
     border-radius: 5px;
     background-color: #ffffff;
-    background: url('../../img/4587.jpg');
+    background: url('4587.jpg');
     background-repeat: no-repeat;
     background-size: 50%;
     background-position: right;
@@ -884,4 +884,35 @@ select {
     right: -2rem;
 }
 
+/* --------------------------------------------------------------------------- */
+
+/* Home Admin */
+
+.container_home {
+    position: absolute;
+    border-radius: 5px;
+    background-color: #ffffff;
+    background: url('3625753.jpg');
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: right;
+    width: 95%;
+}
+
+.home_card{
+    width: 100%;
+    height: 100%;
+    border: 4px solid #BDBDBD;
+    border-radius: 5px;
+    background-color: #6CECCD;
+    padding: 15px 30px;
+}
+
+.card_time{
+    width: 50%;
+    height: 50%;
+    padding: 10px 15px;
+    border: 4px solid #BDBDBD;
+    background-color: #F7FFF7;
+}
 /* --------------------------------------------------------------------------- */
