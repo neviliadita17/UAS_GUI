@@ -23,21 +23,22 @@
             </div>
         </div>
 
-        <form action="{{url('/login/action')}}" method="post" class="form">
+        <form action="{{url('/pasien/login/action')}}" method="post" class="form">
+        {{csrf_field()}}
             <div class="container">
-                <label for="username"><b>Username</b></label>
-                <input id="username" class="form-content" type="text" placeholder="Enter Username" name="username"
+                <label for="email"><b>Email</b></label>
+                <input id="email" class="form-content" type="email" placeholder="Enter Email" name="email"
                     autocomplete="on" required>
 
-                <label for="psw"><b>Password</b></label>
-                <input id="password" class="form-content" type="text" placeholder="Enter Password" name="password"
+                <label for="password"><b>Password</b></label>
+                <input id="password" class="form-content" type="password" placeholder="Enter Password" name="password"
                     autocomplete="on" required>
 
             </div>
 
             <input id="login-btn" type="submit" name="submit" value="LOGIN" />
 
-            <a href="/register" id="register">Klik disini untuk mendaftar</a>
+            <a href="/pasien/register" id="register">Klik disini untuk mendaftar</a>
 
     </div>
 
