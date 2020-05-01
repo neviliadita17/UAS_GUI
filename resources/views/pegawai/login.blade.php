@@ -5,7 +5,7 @@
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link rel="stylesheet" href="{{url('/css/admin_style.css')}}">
+    <link rel="stylesheet" href="{{url('/assets/css/admin_style.css')}}">
     
 </head>
 
