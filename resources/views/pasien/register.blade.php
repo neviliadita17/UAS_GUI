@@ -59,7 +59,7 @@
                     </select>
 
                     <label v-if="selected === 'Iya'" for="n_bpjs">Nomor BPJS</label>
-                    <input v-if="selected === 'Iya'" type="number" id="n_bpjs" name="n_bpjs"
+                    <input v-if="selected === 'Iya'" type="number" id="n_bpjs" name="no_bpjs"
                         placeholder="Nomor BPJS ">
 
                     <label for="st_p">Status Pasien</label>
