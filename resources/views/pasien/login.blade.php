@@ -11,7 +11,6 @@
 </head>
 
 <style>
-
 </style>
 
 <body class="login">
@@ -24,28 +23,20 @@
         </div>
 
         <form action="{{url('/pasien/login/action')}}" method="post" class="form">
-        {{csrf_field()}}
+            {{csrf_field()}}
             <div class="container">
                 <label for="email"><b>Email</b></label>
-                <input id="email" class="form-content" type="email" placeholder="Enter Email" name="email"
-                    autocomplete="on" required>
+                <input id="email" class="form-content" type="email" placeholder="Enter Email" name="email" autocomplete="on" required>
 
                 <label for="password"><b>Password</b></label>
-                <input id="password" class="form-content" type="password" placeholder="Enter Password" name="password"
-                    autocomplete="on" required>
+                <input id="password" class="form-content" type="password" placeholder="Enter Password" name="password" autocomplete="on" required>
 
             </div>
 
             <input id="login-btn" type="submit" name="submit" value="LOGIN" />
 
             <a href="/pasien/register" id="register">Klik disini untuk mendaftar</a>
-
-    </div>
-
-
-
-    </form>
-
+        </form>
     </div>
 </body>
 
