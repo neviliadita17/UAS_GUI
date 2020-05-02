@@ -7,7 +7,7 @@
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <!-- <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"> -->
     <link rel="stylesheet" href="{{url('/assets/css/style.css')}}">
-    <script src="vue.js"></script>
+    <script src="{{url('/assets/vue/vue.js')}}"></script>
     <style></style>
 </head>
 
@@ -34,16 +34,23 @@
             <hr style="height: 10px; background-color: black; border: 10px;">
 
             <div id="app">
-                <form action="/action_page.php" id="form_reg">
+                <form method="POST" action="{{url('/pasien/register/action')}}" id="form_reg">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Email" value="{{old('email')}}">
+
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Password  "></input>
 
                     <label for="nama">Nama Lengkap</label>
-                    <input type="text" id="nama" name="nama" placeholder="Nama Lengkap Anda">
+                    <input type="text" id="nama" name="nama" placeholder="Nama Lengkap Anda" value="{{old('nama')}}">
 
                     <label for="alamat">Alamat</label>
-                    <textarea name="alamat" id="" cols="30" rows="10" placeholder="Alamat "></textarea>
+                    <textarea name="alamat" id="alamat" cols="30" rows="10" placeholder="Alamat" value="{{old('alamat')}}"></textarea>
 
                     <label for="tgl_lahir">Tanggal Lahir</label>
-                    <input type="date" id="tgl_lahir" name="tgl_lahir"></input>
+                    <input type="date" id="tgl_lahir" name="tgl_lahir" value="{{old('tgl_lahir')}}"></input>
 
                     <label for="st_bpjs">Status BPJS</label>
                     <select id="st_bpjs" name="st_bpjs" v-model="selected">
@@ -51,8 +58,8 @@
                         <option value="Iya">Iya</option>
                     </select>
 
-                    <label v-if="selected === 'Iya'" for="no_bpjs">Nomor BPJS</label>
-                    <input v-if="selected === 'Iya'" type="number" id="no_bpjs" name="no_bpjs"
+                    <label v-if="selected === 'Iya'" for="n_bpjs">Nomor BPJS</label>
+                    <input v-if="selected === 'Iya'" type="number" id="n_bpjs" name="n_bpjs"
                         placeholder="Nomor BPJS ">
 
                     <label for="st_p">Status Pasien</label>
@@ -61,7 +68,8 @@
                         <option value="Lama">Lama</option>
                     </select>
 
-                    <button type="submit" class="registerbtn" value="Submit"> Register</button>
+                    <button type="submit" name="submit" class="registerbtn" value="register"> Register</button>
+                    
                 </form>
             </div>
         </div>
