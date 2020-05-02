@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/', function () {
     return view('/welcome');
 });
 
@@ -31,6 +35,17 @@ Route::post('/pegawai/login/action', 'AuthC@loginPegawaiAction');
 
 
 //------------------------ PEGAWAI ------------------------//
+
+// Akun Pasien
+Route::get('pegawai/akun-pasien', 'AkunPasienC@akunPasien');
+Route::get('pegawai/akun-pasien/data-api', 'AkunPasienC@dataAPI');
+
+// Register Pasien from Pegawai
+Route::get('pegawai/akun-pasien/form-register', 'RegPasienC@formRegister');
+Route::post('pegawai/akun-pasien/form-register/action', 'RegPasienC@registerAction');
+
+// Antrian
+Route::get('pegawai/antrian', 'DataAntrianC@antrian');
 
 //Poli Manajemen
 Route::get('/pegawai/poli', 'PoliManajemenC@index');
