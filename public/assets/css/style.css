@@ -391,7 +391,7 @@ a.blogout {
     flex-direction: column;
 }
 
-.login input[type=text],
+.login input[type=email],
 .login input[type=password] {
     width: 100%;
     padding: 12px 20px;
@@ -506,6 +506,8 @@ a.blogout {
 input[type=text],
 [type=number],
 [type=date],
+[type=email],
+[type=password],
 select,
 textarea {
     width: 100%;
