@@ -10,10 +10,10 @@
 
 <body>
     <div class="topnav" id="myTopnav">
-        <img style="float:left" src="logo.png" width="48px" height="48px">
+        <img style="float:left" src="/img/logo.png" width="48px" height="48px">
         <a style="background-color:inherit; color:inherit;" href="#home">Puskesmas</a>
         <a style="background-color:red; color:inherit; float:right;" class="blogout" href="">
-            <img class="imglogout" src="logout.png">
+            <img class="imglogout" src="/img/logout.png">
             <div class="logout">LOGOUT</div>
         </a>
 
@@ -44,18 +44,20 @@
             </div>
         </div>
 
+        {{csrf_field()}}
         <div class="row">
             <div class="col-12 col-s-12 data_tabel" style="overflow-x:auto;">
                 <div class="row">
                     <div class="col-8 col-s-6" style="min-width: 500px;">
                         <div class="form_in">
-                            <form action="/action_page.php">
+                            <form action="{{url('/pegawai/poli/add/action')}}" method="post" class="form" enctype="multipart/form-data">
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <div class="row">
                                     <div class="col-25">
                                         <label for="fname">Nama Poli</label>
                                     </div>
                                     <div class="col-75">
-                                        <input type="text" id="fname" name="nama" placeholder="Nama Poli..">
+                                        <input type="text" id="fname" name="nama_poli" placeholder="Nama Poli.." required>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -63,7 +65,7 @@
                                         <label for="subject">Deskripsi</label>
                                     </div>
                                     <div class="col-75">
-                                        <textarea id="subject" name="subject" placeholder="Deskripsi.."
+                                        <textarea id="subject" name="deskripsi" placeholder="Deskripsi.." required
                                             style="height:200px"></textarea>
                                     </div>
                                     <input type="submit" value="Submit">
@@ -79,7 +81,7 @@
                             </div>
                             <div class="wrapperfile">
                                 <div class="file-upload" @change="onFileChange">
-                                    <input type="file" />
+                                    <input type="file" name="file"/>
                                     <i class="fa fa-arrow-up"></i>
                                 </div>
                             </div>
