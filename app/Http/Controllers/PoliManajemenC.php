@@ -7,39 +7,38 @@ use Illuminate\Support\Facades\DB;
 
 class PoliManajemenC extends Controller
 {
-    
+
     public function index()
     {
         $poli = DB::table('tb_poli')->get();
-        return view('pegawai/poli',['tb_poli' => $poli]);
+        return view('pegawai/poli/poli', ['tb_poli' => $poli]);
     }
 
     public function poliAdd()
     {
         $data['title'] = "Pegawai - Add Poli";
         $data['tb_poli'] = DB::select("SELECT * FROM tb_poli");
-                          return view('pegawai/poli_add', $data);
+        return view('pegawai/poli/poli_add', $data);
     }
 
     public function poliAddAction(Request $request)
     {
         $method = $request->method();
-        if($method == "POST") {
-            $directory = 'img/poli_img';
-            $file      = $request->file('file');
-            $file->move($directory, $file->getClientOriginalName());
+        if ($method == "POST") {
+            $image = $request->file('file');
+            $imageName = $image->getClientOriginalName();
+            $image->move(public_path('/img/poli_img/'), $imageName);
 
             DB::insert("INSERT INTO tb_poli (nama_poli,deskripsi,gambar_poli) VALUES (?, ?, ?)", [
 
                 $request->input('nama_poli'),
                 $request->input('deskripsi'),
-                $directory."/".$file->getClientOriginalName()
+                '/img/poli_img/' . $imageName
             ]);
             return redirect('/pegawai/poli');
-        }else {
+        } else {
             return redirect('/pegawai/poli/add');
         }
-
     }
 
     // public function poliEdit($id)
