@@ -16,9 +16,11 @@ class AkunPasienC extends Controller
 
     public function dataAPI()
     {
-        $item = DB::select("SELECT nama_pasien AS 'Nama Pasien', alamat AS Alamat, 
-                DATE_FORMAT(tgl_lahir, '%d-%M-%Y') AS 'Tanggal Lahir', n_rm AS 'Nomor Rekam Medis',
-                 n_bpjs AS 'Nomor BPJS' FROM tb_pasien",[]);
+        $item = DB::select(
+            "SELECT id_pasien AS Id, nama_pasien AS 'Nama Pasien', alamat AS Alamat, 
+                DATE_FORMAT(tgl_lahir, '%d-%M-%Y') AS 'Tanggal Lahir', n_bpjs AS 'Nomor BPJS', n_rm AS 'Nomor Rekam Medis' FROM tb_pasien",
+            []
+        );
         return response(['data' => $item]);
     }
 
@@ -90,10 +92,10 @@ class AkunPasienC extends Controller
         }
     }
 
-    public function editDataPasien($nama_pasien,$alamat)
+    public function editDataPasien($id)
     {
-        $tb_pasien = DB::table('tb_pasien')->where('nama_pasien',$nama_pasien)->where('alamat',$alamat)->get();
-        return view('pegawai/akun_pasien/akun_pasien_edit',['tb_pasien' => $tb_pasien]);
+        $tb_pasien = DB::table('tb_pasien')->where('id_pasien', $id)->get();
+        return view('pegawai/akun_pasien/akun_pasien_edit', ['tb_pasien' => $tb_pasien]);
     }
 
     public function editDataPasienAction(Request $request)
@@ -101,7 +103,7 @@ class AkunPasienC extends Controller
         $method = $request->method();
         if ($method == "POST") {
             if ($request->input('st_bpjs') == "Iya" && $request->input('st_p') == "Lama") {
-                DB::table('tb_pasien')->where('id_pasien',$request->id)->update([
+                DB::table('tb_pasien')->where('id_pasien', $request->id)->update([
                     'id_pasien' => $request->id,
                     'email' => $request->email,
                     'password' => $request->password,
@@ -112,9 +114,9 @@ class AkunPasienC extends Controller
                     'n_rm' => $request->n_rm,
                     'status_bpjs' => $request->st_bpjs,
                     'n_bpjs' => $request->no_bpjs
-                    ]);
+                ]);
             } else if ($request->input('st_bpjs') == "Tidak" && $request->input('st_p') == "Lama") {
-                DB::table('tb_pasien')->where('id_pasien',$request->id)->update([
+                DB::table('tb_pasien')->where('id_pasien', $request->id)->update([
                     'id_pasien' => $request->id,
                     'email' => $request->email,
                     'password' => $request->password,
@@ -125,9 +127,9 @@ class AkunPasienC extends Controller
                     'n_rm' => $request->n_rm,
                     'status_bpjs' => $request->st_bpjs,
                     'n_bpjs' => "Tidak Terdaftar Sepagai Pasien BPJS"
-                    ]);
+                ]);
             } else {
-                DB::table('tb_pasien')->where('id_pasien',$request->id)->update([
+                DB::table('tb_pasien')->where('id_pasien', $request->id)->update([
                     'id_pasien' => $request->id,
                     'email' => $request->email,
                     'password' => $request->password,
@@ -138,10 +140,10 @@ class AkunPasienC extends Controller
                     'n_rm' => "Nomor Rekam Medis Belum Terdaftar",
                     'status_bpjs' => $request->st_bpjs,
                     'n_bpjs' => $request->no_bpjs
-                    ]);
-                        }
-                    return redirect('/pegawai/akun-pasien');
-                } else {
+                ]);
+            }
+            return redirect('/pegawai/akun-pasien');
+        } else {
             return redirect('/pegawai/akun-pasien/edit/{id}');
         }
     }
