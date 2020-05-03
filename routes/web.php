@@ -36,10 +36,16 @@ Route::post('/pegawai/login/action', 'AuthC@loginPegawaiAction');
 Route::get('/pegawai/akun-pasien', 'AkunPasienC@akunPasien');
 Route::get('pegawai/akun-pasien/data-api', 'AkunPasienC@dataAPI');
 // Register Pasien from Pegawai
-Route::get('pegawai/akun-pasien/form-register', 'RegPasienC@formRegister');
-Route::post('pegawai/akun-pasien/form-register/action', 'RegPasienC@registerAction');
+Route::get('pegawai/akun-pasien/form-register', 'AkunPasienC@formRegister');
+Route::post('pegawai/akun-pasien/form-register/action', 'AkunPasienC@registerAction');
+Route::get('/pegawai/akun-pasien/edit/{nama_pasien}/{alamat}', 'AkunPasienC@editDataPasien');
+Route::post('/pegawai/akun-pasien/edit/action', 'AkunPasienC@editDataPasienAction');
+
+
 // Antrian
-Route::get('pegawai/antrian', 'DataAntrianC@antrian');
+Route::get('pegawai/antrian', 'DataAntrianC@index');
+Route::get('/pegawai/antrian/add', 'DataAntrianC@dataAntrianAdd');
+Route::post('/pegawai/antrian/add/action', 'DataAntrianC@dataAntrianAddAction');
 
 
 //Poli Manajemen
