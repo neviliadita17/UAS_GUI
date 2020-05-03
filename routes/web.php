@@ -44,7 +44,8 @@ Route::post('/pegawai/akun-pasien/edit/action', 'AkunPasienC@editDataPasienActio
 
 // Antrian
 Route::get('pegawai/antrian', 'DataAntrianC@index');
-Route::get('/pegawai/antrian/add', 'DataAntrianC@dataAntrianAdd');
+Route::get('pegawai/antrian/data-api', 'DataAntrianC@dataAPIPasien');
+Route::get('/pegawai/antrian/add/{id}', 'DataAntrianC@dataAntrianAdd');
 Route::post('/pegawai/antrian/add/action', 'DataAntrianC@dataAntrianAddAction');
 
 
