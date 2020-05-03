@@ -10,30 +10,7 @@
 </head>
 
 <body>
-    <div class="topnav" id="myTopnav">
-        <img style="float:left;" src="../../img/logo.png" width="48px" height="48px">
-        <a style="background-color:inherit; color:inherit;" href="#home">Puskesmas</a>
-        <a style="background-color:red; color:inherit; float:right;" class="blogout" href="">
-            <img class="imglogout" src="../../img/logout.png">
-            <div class="logout">LOGOUT</div>
-        </a>
-
-        <a href="javascript:void(0);" class="icon" onclick="topNav()">
-            <i class="fa fa-bars"></i>
-        </a>
-    </div>
-
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#"><i class="fas fa-home"></i> Home
-            <hr></a>
-        <a href="#"><i class="fas fa-address-card"></i> Data Pasien
-            <hr></a>
-        <a href="#"><i class="fas fa-user-friends"></i> Antrian
-            <hr></a>
-        <a href="#"><i class="fas fa-file-alt"></i> Manajement
-            <hr></a>
-    </div>
+    @include('sidebar')
 
     <div class="main" id="main">
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
