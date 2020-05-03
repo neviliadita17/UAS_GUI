@@ -4,14 +4,14 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link rel="stylesheet" href="{{url('/assets/css/admin_style.css')}}">
-    <script src="{{url('/assets/vue/vue.js')}}"></script>
-    ​<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="http://localhost:8000/assets/css/admin_style.css">
+    <script src="http://localhost:8000/assets/vue/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
     <div class="topnav" id="myTopnav">
-        <img style="float:left" src="../../img/logo.png" width="48px" height="48px">
+        <img style="float:left;" src="../../img/logo.png" width="48px" height="48px">
         <a style="background-color:inherit; color:inherit;" href="#home">Puskesmas</a>
         <a style="background-color:red; color:inherit; float:right;" class="blogout" href="">
             <img class="imglogout" src="../../img/logout.png">
@@ -42,7 +42,9 @@
                 <div class="col-12 col-s-12">
                     <h1>Data Pasien
                         <span style="float: right;">
-                            <a class="button buttonGreen" href="{{url('pegawai/akun-pasien/form-register')}}">Tambah Pasien</a>
+                            <a class="button buttonGreen" href="http://localhost:8000/pegawai/akun-pasien/form-register">
+                                Tambah Pasien
+                            </a>
                         </span>
                     </h1>
                 </div>
@@ -50,15 +52,13 @@
         </div>
 
         <div class="row">
-            <div class="col-12 col-s-12 data_tabel" style="overflow-x:auto;">
-                <div id="app">
-                    <div>
-                        <select v-model="column">
-                            <option :value="null">No Column Filter</option>
-                            <option v-for="col in cols" :key="col">@{{ col }}</option>
-                        </select>
-                        <input class="search_bar" v-model="search" type="text" placeholder="Search...">
-                    </div>
+            <div class="col-12 col-s-12 data_tabel">
+                <div id="app" style="overflow-x:auto;">
+                    <select v-model="column">
+                        <option :value="null">No Column Filter</option>
+                        <option v-for="col in cols" :key="col">@{{ col }}</option>
+                    </select>
+                    <input class="search_bar" v-model="search" type="text" placeholder="Search...">
                     <table class="data_tb">
                         <thead>
                             <tr>
@@ -131,15 +131,15 @@
             }
         },
         methods: {
-            daftarAntrian(col){
-                window.location.href = '/pegawai/akun-pasien/daftar-antrian/?nama_pasien=' +col['Nama Pasien']+ '&alamat=' +col.Alamat;
+            daftarAntrian(col) {
+                window.location.href = '/pegawai/akun-pasien/daftar-antrian/?' + col['Nama Pasien'] + '/' + col.Alamat;
             },
-            editDataPasien(col){
-                window.location.href = '/pegawai/akun-pasien/edit/?nama_pasien=' +col['Nama Pasien']+ '&alamat=' +col.Alamat;
+            editDataPasien(col) {
+                window.location.href = '/pegawai/akun-pasien/edit/' + col['Nama Pasien'] + '/' + col.Alamat;
             },
-            upDate: function () {
-                    axios.get('http://localhost:8000/pegawai/akun-pasien/data-api')
-                        .then(response => this.items = response.data['data'])
+            upDate: function() {
+                axios.get('http://localhost:8000/pegawai/akun-pasien/data-api')
+                    .then(response => this.items = response.data['data'])
             }
         },
         mounted() {
