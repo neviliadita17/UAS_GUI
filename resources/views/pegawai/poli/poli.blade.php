@@ -52,20 +52,24 @@
                 <div id="app" style="overflow-x:auto;">
                     <select v-model="column">
                         <option :value="null">No Column Filter</option>
-                        <option v-for="col in cols" :key="col">@{{ col }}</option>
+                        <option>Nama Poli</option>
                     </select>
                     <input class="search_bar" v-model="search" type="text" placeholder="Search...">
                     <table class="data_tb">
                         <thead>
                             <tr>
-                                <th v-for="col in cols" :key="col">@{{ col }}</th>
+                                <th>Nama Poli</th>
+                                <th>Deskripsi</th>
+                                <th>Gambar</th>
                                 <th width="10%">Menu</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="row in rows" :key="row.id">
-                                <td v-for="col in cols" :key="col">@{{ row[col] }}</td>
-                                <td><a class="button buttonBlue" href="">Edit</a></td>
+                                <td>@{{row['Nama Poli']}}</td>
+                                <td>@{{row['Deskripsi']}}</td>
+                                <td><img v-bind:src="row['Gambar']" alt="" style="height: 20%"></td>
+                                <td><a class="button buttonBlue" v-on:click="editPoli(row)">Edit</a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -127,14 +131,11 @@
             }
         },
         methods: {
-            daftarAntrian(col) {
-                window.location.href = '/pegawai/akun-pasien/daftar-antrian/?nama_pasien=' + col['Nama Pasien'] + '&alamat=' + col.Alamat;
-            },
-            editDataPasien(col) {
-                window.location.href = '/pegawai/akun-pasien/edit/?nama_pasien=' + col['Nama Pasien'] + '&alamat=' + col.Alamat;
+            editPoli(col) {
+                window.location.href = '/pegawai/poli/edit/' + col.Id;
             },
             upDate: function() {
-                axios.get('http://localhost:8000/pegawai/akun-pasien/data-api')
+                axios.get('http://localhost:8000/pegawai/poli/data-api')
                     .then(response => this.items = response.data['data'])
             }
         },

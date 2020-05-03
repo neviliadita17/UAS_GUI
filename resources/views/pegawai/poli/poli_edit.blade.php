@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="{{url('/assets/css/admin_style.css')}}">
-    <script src="vue.js"></script>
+    <script src="{{url('/assets/vue/vue.js')}}"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
     <div class="topnav" id="myTopnav">
-        <img style="float:left" src="logo.png" width="48px" height="48px">
+        <img style="float:left" src="/img/logo.png" width="48px" height="48px">
         <a style="background-color:inherit; color:inherit;" href="#home">Puskesmas</a>
         <a style="background-color:red; color:inherit; float:right;" class="blogout" href="">
-            <img class="imglogout" src="logout.png">
+            <img class="imglogout" src="/img/logout.png">
             <div class="logout">LOGOUT</div>
         </a>
 
@@ -39,23 +40,26 @@
         <div class="header">
             <div class="row">
                 <div class="col-12 col-s-12" style="overflow-x:auto;">
-                    <h1>Form Edit Poli</h1>
+                    <h1>Form Penambahan Poli</h1>
                 </div>
             </div>
         </div>
 
-        <div class="row">
+
+        <div id="app" class="row">
             <div class="col-12 col-s-12 data_tabel" style="overflow-x:auto;">
-                <div class="row">
-                    <div class="col-8 col-s-6" style="min-width: 500px;">
+                <form action="{{url('/pegawai/poli/edit/action')}}" method="post" class="form" enctype="multipart/form-data">
+                    <div class="row">
                         <div class="form_in">
-                            <form action="/action_page.php">
+                            <div class="col-8 col-s-6" style="min-width: 500px;">
+                                {{csrf_field()}}
+                                <input type="hidden" name="id" value="{{$tb_poli->id_poli}}">
                                 <div class="row">
                                     <div class="col-25">
                                         <label for="fname">Nama Poli</label>
                                     </div>
                                     <div class="col-75">
-                                        <input type="text" id="fname" name="nama" placeholder="Nama Poli..">
+                                        <input type="text" id="fname" name="nama_poli" placeholder="Nama Poli.." required value="{{$tb_poli->nama_poli}}">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -63,30 +67,28 @@
                                         <label for="subject">Deskripsi</label>
                                     </div>
                                     <div class="col-75">
-                                        <textarea id="subject" name="subject" placeholder="Deskripsi.."
-                                            style="height:200px"></textarea>
+                                        <textarea id="subject" name="deskripsi" placeholder="Deskripsi.." required style="height:200px">{{$tb_poli->deskripsi}}</textarea>
                                     </div>
-                                    <input type="submit" value="Submit">
-
-                                </div>
-
-                        </div>
-                    </div>
-                    <div class="col-4 col-s-6" style="min-width: 200px;">
-                        <div id="app" style="padding: 15px; margin-top: 6px; text-align: center;">
-                            <div id="preview">
-                                <img v-if="url" :src="url" style="width: 100%; max-width: 200px;" />
-                            </div>
-                            <div class="wrapperfile">
-                                <div class="file-upload" @change="onFileChange">
-                                    <input type="file" />
-                                    <i class="fa fa-arrow-up"></i>
                                 </div>
                             </div>
+                            <div class="col-4 col-s-6" style="min-width: 200px;">
+                                <div style="padding: 15px; margin-top: 6px; text-align: center;">
+                                    <div>
+                                        <img v-if="url" :src="url" style="width: 100%; max-width: 200px;" />
+                                    </div>
+                                    <div class="wrapperfile">
+                                        <div class="file-upload" @change="onFileChange">
+                                            <input type="file" name="file" />
+                                            <i class="fa fa-arrow-up"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="submit" value="Submit">
                         </div>
                     </div>
-                    </form>
-                </div>
+                </form>
+
             </div>
         </div>
 
@@ -123,13 +125,17 @@
         el: '#app',
         data() {
             return {
-                url: "gallery.png",
+                url: "{{$tb_poli->gambar_poli}}",
             }
         },
         methods: {
             onFileChange(e) {
                 const file = e.target.files[0];
+                this.test = {
+                    name: URL.createObjectURL(file)
+                };
                 this.url = URL.createObjectURL(file);
+                console.log(file)
             }
         }
     })
