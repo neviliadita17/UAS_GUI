@@ -762,6 +762,8 @@ select {
 #form_reg input[type=text],
 #form_reg [type=number],
 #form_reg [type=date],
+#form_reg [type=email],
+#form_reg [type=password],
 #form_reg select,
 #form_reg textarea {
     width: 100%;
