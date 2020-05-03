@@ -10,17 +10,21 @@ class DataAntrianC extends Controller
 
     public function index()
     {
-        //belom dijoin
         $data['antrian'] = DB::table('tb_antrian')->get();
-        return view('pegawai/antrian', ['tb_antrian' => $data]);
+        return view('pegawai/antrian/antrian', ['tb_antrian' => $data]);
+
+        
     }
 
-    public function dataAPI()
+    public function dataAPIPasien()
     {
-        $item = DB::select("SELECT no_antrian AS 'No Antrian', id_pasien AS 'Nama Pasien', 
-                id_poli AS 'Poli', DATE_FORMAT(tgl_a, '%d-%M-%Y') AS 'Tanggal Antrian',
-                status AS 'Status' FROM tb_antrian", []);
-        return response(['data' => $item]);
+        $item = DB::select("SELECT no_antrian AS 'No Antrian', tb_pasien.nama_pasien AS 'Nama Pasien',
+                            tb_poli.nama_poli AS 'Poli', DATE_FORMAT(tgl_a, '%d-%M-%Y') AS 'Tanggal Antrian',
+                            status AS 'Status' FROM tb_antrian
+                            JOIN tb_pasien ON tb_antrian.id_pasien= tb_pasien.id_pasien
+                            JOIN tb_poli ON tb_antrian.id_poli = tb_poli.id_poli;", []);
+        return response([ 'data' => $item ]);
+        
     }
 
     public function dataAntrianAdd($id)
