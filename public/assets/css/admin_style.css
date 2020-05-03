@@ -561,7 +561,7 @@ a.btable {
 
 /* Tabel Data */
 .search_bar {
-    background-image: url('research.png');
+    background-image: url('../../img/research.png');
     background-position: 10px 10px;
     background-repeat: no-repeat;
     font-size: 15px;
@@ -721,7 +721,7 @@ select {
 
 .card_pasien {
     min-width: 300px;
-    max-width: 600px;
+    max-width: 800px;
     background-color: white;
     border: solid 2px black;
     border-radius: 5px;
@@ -901,7 +901,7 @@ select {
     width: 95%;
 }
 
-.home_card{
+.home_card {
     width: 100%;
     height: 100%;
     border: 4px solid #BDBDBD;
@@ -910,11 +910,12 @@ select {
     padding: 15px 30px;
 }
 
-.card_time{
+.card_time {
     width: 50%;
     height: 50%;
     padding: 10px 15px;
     border: 4px solid #BDBDBD;
     background-color: #F7FFF7;
 }
+
 /* --------------------------------------------------------------------------- */
