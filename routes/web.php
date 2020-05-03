@@ -50,8 +50,8 @@ Route::post('/pegawai/antrian/add/action', 'DataAntrianC@dataAntrianAddAction');
 
 //Poli Manajemen
 Route::get('/pegawai/poli', 'PoliManajemenC@index');
+Route::get('/pegawai/poli/data-api', 'PoliManajemenC@poliAPI');
 Route::get('/pegawai/poli/add', 'PoliManajemenC@poliAdd');
 Route::post('/pegawai/poli/add/action', 'PoliManajemenC@poliAddAction');
 Route::get('/pegawai/poli/edit/{id}', 'PoliManajemenC@poliEdit');
 Route::post('/pegawai/poli/edit/action', 'PoliManajemenC@poliEditAction');
-
