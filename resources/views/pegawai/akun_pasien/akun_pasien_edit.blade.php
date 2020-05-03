@@ -30,10 +30,10 @@
             <hr style="height: 10px; background-color: black; border: 10px;">
 
             <div id="app">
-            @foreach($tb_pasien as $pasien)
+                @foreach($tb_pasien as $pasien)
                 <form action="{{url('pegawai/akun-pasien/edit/action')}}" id="form_reg" method="POST">
-                {{ csrf_field() }}
-                <input type="hidden" name="id" value="{{ $pasien->id_pasien }}">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="id" value="{{ $pasien->id_pasien }}">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" placeholder="Email Anda" value="{{ $pasien->email }}" required>
 
@@ -50,20 +50,20 @@
                     <input type="date" id="tgl_lahir" name="tgl_lahir" value="{{ $pasien->tgl_lahir }}" required></input>
 
                     <label for="st_bpjs">Status BPJS</label>
-                    <select id="st_bpjs" name="st_bpjs" v-model="selected"  required>
-                        <option value="Tidak" >Tidak</option>
+                    <select id="st_bpjs" name="st_bpjs" v-model="selected" required>
+                        <option value="Tidak">Tidak</option>
                         <option value="Iya">Iya</option>
                     </select>
 
                     <label v-if="selected === 'Iya'" for="n_bpjs">Nomor BPJS</label>
                     <input v-if="selected === 'Iya'" type="number" id="no_bpjs" name="no_bpjs" placeholder="Nomor BPJS " value="{{ $pasien->n_bpjs }}" required>
-                    
+
                     <label for="st_p">Status Pasien</label>
                     <select id="st_p" name="st_p" v-model="selectedrm" required>
                         <option value="Baru">Baru</option>
                         <option value="Lama">Lama</option>
                     </select>
-                    
+
                     <label v-if="selectedrm === 'Baru'" for="n_rm">Tambahkan Nomor Rekam Medis dengan Merubah Status Pasien <br><br></label>
                     <label v-if="selectedrm === 'Lama'" for="n_rm">Nomor Rekam Medis</label>
                     <input v-if="selectedrm === 'Lama'" type="number" id="n_rm" name="n_rm" placeholder="Nomor Rekam Medis " value="{{ $pasien->n_rm }}" required>
@@ -72,7 +72,7 @@
                 </form>
                 @endforeach
             </div>
-           
+
         </div>
     </div>
 
@@ -87,4 +87,4 @@
     });
 </script>
 
-</html> 
+</html>

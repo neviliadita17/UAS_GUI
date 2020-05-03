@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="{{url('/assets/css/admin_style.css')}}">
-    <script src="vue.js"></script>
+    <script src="http://localhost:8000/assets/vue/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
     <div class="topnav" id="myTopnav">
-        <img style="float:left;" src="logo.png" width="48px" height="48px">
+        <img style="float:left;" src="/img/logo.png" width="48px" height="48px">
         <a style="background-color:inherit; color:inherit;" href="#home">Puskesmas</a>
         <a style="background-color:red; color:inherit; float:right;" class="blogout" href="">
-            <img class="imglogout" src="logout.png">
+            <img class="imglogout" src="/img/logout.png">
             <div class="logout">LOGOUT</div>
         </a>
 
@@ -40,6 +41,11 @@
             <div class="row">
                 <div class="col-12 col-s-12">
                     <h1>Antrian Pasien</h1>
+                    <span style="float: right;">
+                            <a class="button buttonGreen" href="http://localhost:8000/pegawai/antrian/add">
+                                Tambah Pasien
+                            </a>
+                        </span>
                 </div>
             </div>
         </div>
@@ -49,18 +55,18 @@
                 <div id="app" style="overflow-x:auto;">
                     <select v-model="column">
                         <option :value="null">No Column Filter</option>
-                        <option v-for="col in cols" :key="col">{{ col }}</option>
+                        <option v-for="col in cols" :key="col">@{{ col }}</option>
                     </select>
                     <input class="search_bar" v-model="search" type="text" placeholder="Search...">
                     <table class="data_tb">
                         <thead>
                             <tr>
-                                <th v-for="col in cols" :key="col">{{ col }}</th>
+                                <th v-for="col in cols" :key="col">@{{ col }}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="row in rows" :key="row.id">
-                                <td v-for="col in cols" :key="col">{{ row[col] }}</td>
+                                <td v-for="col in cols" :key="col">@{{ row[col] }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -131,6 +137,17 @@
                         .includes(this.search) : prop.toString(10).includes(this.search)))
                 })
             }
+        },
+
+        methods: {
+            upDate: function() {
+                axios.get('http://localhost:8000/pegawai/antrian/data-api')
+                    .then(response => this.items = response.data['data'])
+            }
+        },
+        mounted() {
+            this.upDate();
+            this.timer = setInterval(this.upDate, 5000)
         }
     })
 </script>

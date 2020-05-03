@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="{{url('/assets/css/admin_style.css')}}">
-    <script src="vue.js"></script>
 </head>
 
 <body>
     <div class="topnav" id="myTopnav">
-        <img style="float:left" src="logo.png" width="48px" height="48px">
+        <img style="float:left" src="/img/logo.png" width="48px" height="48px">
         <a style="background-color:inherit; color:inherit;" href="#home">Puskesmas</a>
         <a style="background-color:red; color:inherit; float:right;" class="blogout" href="">
-            <img class="imglogout" src="logout.png">
+            <img class="imglogout" src="/img/logout.png">
             <div class="logout">LOGOUT</div>
         </a>
 
@@ -51,31 +50,36 @@
                         <div class="card_pasien">
                             <div class="row">
                                 <div class="col-8 col-s-8">
-                                    <h3>Nama : <span>Nya</span></h3>
-                                    <h3>NRM &nbsp;: <span>030303094</span></h3>
+                                    @foreach($tb_pasien as $p)
+                                    <h4>Nama&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span>{{ $p->nama_pasien }}</span></h4>
+                                    <h4>Tanggal Lahir : <span>{{ $p->tl }}</span></h4>
+                                    <h4>NRM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : <span>{{ $p->n_rm }}</span></h4>
+                                    @endforeach
                                 </div>
                                 <div class="col-4 col-s-4">
-                                    <img src="patient.png" alt="" style="max-width: 100px; min-width: 100px;">
+                                    <img src="../../../img/patient.png" alt="" style="max-width: 150px; min-width: 150px;">
                                 </div>
                             </div>
                         </div>
-                        <div class="form_in" style="max-width: 600px; margin: auto;">
-                            <form action="/action_page.php">
+                        <form action="{{url('pegawai/antrian/add/action')}}" method="POST">
+                            {{csrf_field()}}
+                            <div class="form_in" style="max-width: 600px; margin: auto;">
                                 <div class="row">
+                                    <input type="hidden" name="id_pasien" value="{{ $p->id_pasien }}">
                                     <div class="col-25">
                                         <label for="poli">Poli</label>
                                     </div>
                                     <div class="col-75">
                                         <select id="poli" name="poli">
-                                            <option value="australia">Gizi</option>
-                                            <option value="canada">Gigi</option>
-                                            <option value="usa">Umum</option>
+                                            @foreach($tb_poli as $poli)
+                                            <option value="{{ $poli->id_poli }}">{{ $poli->nama_poli }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <input type="submit" value="Submit">
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -109,21 +113,6 @@
             x.className = "topnav";
         }
     }
-
-    const vm = new Vue({
-        el: '#app',
-        data() {
-            return {
-                url: "gallery.png",
-            }
-        },
-        methods: {
-            onFileChange(e) {
-                const file = e.target.files[0];
-                this.url = URL.createObjectURL(file);
-            }
-        }
-    })
 </script>
 
 </html>

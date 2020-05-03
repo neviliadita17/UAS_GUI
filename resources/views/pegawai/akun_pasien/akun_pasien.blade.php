@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="http://localhost:8000/assets/css/admin_style.css">
-    <script src="http://localhost:8000/assets/vue/vue.js"></script>
+    <script src="{{url('/assets/vue/vue.js')}}"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
@@ -56,19 +56,30 @@
                 <div id="app" style="overflow-x:auto;">
                     <select v-model="column">
                         <option :value="null">No Column Filter</option>
-                        <option v-for="col in cols" :key="col">@{{ col }}</option>
+                        <option>Nama Pasien</option>
+                        <option>Alamat</option>
+                        <option>Nomor BPJS</option>
+                        <option>Nomor Rekam Medis</option>
                     </select>
                     <input class="search_bar" v-model="search" type="text" placeholder="Search...">
                     <table class="data_tb">
                         <thead>
                             <tr>
-                                <th v-for="col in cols" :key="col">@{{ col }}</th>
+                                <th>Nama Pasien</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Alamat</th>
+                                <th>Nomor BPJS</th>
+                                <th>Nomor Rekam Medis</th>
                                 <th>Menu</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="row in rows" :key="row.id">
-                                <td v-for="col in cols" :key="col">@{{ row[col] }}</td>
+                                <td>@{{row['Nama Pasien']}}</td>
+                                <td>@{{row['Tanggal Lahir']}}</td>
+                                <td>@{{row['Alamat']}}</td>
+                                <td>@{{row['Nomor BPJS']}}</td>
+                                <td>@{{row['Nomor Rekam Medis']}}</td>
                                 <td><a class="btable buttonBlue" v-on:click="daftarAntrian(row)">Daftar Antrian</a><a class="btable buttonRed" v-on:click="editDataPasien(row)">Edit</a></td>
                             </tr>
                         </tbody>
@@ -104,7 +115,6 @@
             x.className = "topnav";
         }
     }
-
     new Vue({
         el: '#app',
         data: () => ({
@@ -120,11 +130,8 @@
                 if (!this.items.length) {
                     return []
                 }
-
                 return this.items.filter(item => {
                     let props = (this.search && this.column) ? [item[this.column]] : Object.values(item)
-
-
                     return props.some(prop => !this.search || ((typeof prop === 'string') ? prop
                         .includes(this.search) : prop.toString(10).includes(this.search)))
                 })
@@ -132,10 +139,10 @@
         },
         methods: {
             daftarAntrian(col) {
-                window.location.href = '/pegawai/akun-pasien/daftar-antrian/?' + col['Nama Pasien'] + '/' + col.Alamat;
+                window.location.href = '/pegawai/antrian/add/' + col['Id'];
             },
             editDataPasien(col) {
-                window.location.href = '/pegawai/akun-pasien/edit/' + col['Nama Pasien'] + '/' + col.Alamat;
+                window.location.href = '/pegawai/akun-pasien/edit/' + col['Id'];
             },
             upDate: function() {
                 axios.get('http://localhost:8000/pegawai/akun-pasien/data-api')
