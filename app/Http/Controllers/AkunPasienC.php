@@ -128,6 +128,32 @@ class AkunPasienC extends Controller
                     'status_bpjs' => $request->st_bpjs,
                     'n_bpjs' => "Tidak Terdaftar Sepagai Pasien BPJS"
                 ]);
+            }else if ($request->input('st_bpjs') == "Iya" && $request->input('st_p') == "Baru") {
+                    DB::table('tb_pasien')->where('id_pasien', $request->id)->update([
+                        'id_pasien' => $request->id,
+                        'email' => $request->email,
+                        'password' => $request->password,
+                        'nama_pasien' => $request->nama,
+                        'alamat' => $request->alamat,
+                        'tgl_lahir' => $request->tgl_lahir,
+                        'status_pasien' => $request->st_p,
+                        'n_rm' => "Nomor Rekam Medis Belum Terdaftar",
+                        'status_bpjs' => $request->st_bpjs,
+                        'n_bpjs' => $request->no_bpjs
+                    ]);
+            } else if ($request->input('st_bpjs') == "Tidak" && $request->input('st_p') == "Baru") {
+                DB::table('tb_pasien')->where('id_pasien', $request->id)->update([
+                    'id_pasien' => $request->id,
+                    'email' => $request->email,
+                    'password' => $request->password,
+                    'nama_pasien' => $request->nama,
+                    'alamat' => $request->alamat,
+                    'tgl_lahir' => $request->tgl_lahir,
+                    'status_pasien' => $request->st_p,
+                    'n_rm' => "Nomor Rekam Medis Belum Terdaftar",
+                    'status_bpjs' => $request->st_bpjs,
+                    'n_bpjs' => "Tidak Terdaftar Sepagai Pasien BPJS"
+                ]);
             } else {
                 DB::table('tb_pasien')->where('id_pasien', $request->id)->update([
                     'id_pasien' => $request->id,
