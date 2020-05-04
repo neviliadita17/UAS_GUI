@@ -545,19 +545,30 @@ button[type=submit]:hover {
     padding: 10px;
 }
 
-#home_btn {
 
-    width: 234.22px;
-    height: 50px;
-    top: 154px;
+.login_btn {
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 60px;
+    border: 25px solid #6CAFEC;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    width: 75%;
+    margin-left: 12%;
     background: #6CAFEC;
-    border-radius: 50px;
+    color: #fff;
+    border-radius: 60px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
 }
 
-#home_btn:hover {
-    background-color: blue;
+.login_btn:hover {
+    background-color: #5CB85C;
+    border-color: #5CB85C;
 }
-
 
 
 #home_grid {
