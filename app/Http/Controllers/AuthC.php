@@ -152,7 +152,7 @@ class AuthC extends Controller
                 $request->session()->put('s_nama_peg', $result->nama_peg);
 
 
-                return redirect('/welcome');
+                return redirect('/pegawai/home');
             } else {
                 return redirect('/pegawai/login')->with('error', 'Email atau Password salah,harap masukkan ulang!');
             }
@@ -161,17 +161,10 @@ class AuthC extends Controller
         }
     }
 
-    //     //Logout
-    //     public function logout(){
-    //         Session::flush();
-    //         return redirect('/')->with('warning','Kamu berhasil logout');
-    //     }
-
-    //     public function Pegawailogout(){
-    //         Session::flush();
-    //         return redirect('pegawai/logout')->with('warning','Kamu berhasil logout');
-    //     }
-
-
-
+    //Logout
+    public function logout()
+    {
+        Session::flush();
+        return redirect('/pegawai/login')->with('warning', 'Kamu berhasil logout');
+    }
 }
