@@ -45,7 +45,7 @@ class AuthC extends Controller
                 $request->session()->put('s_n_bpjs', $result->n_bpjs);
                 $request->session()->put('s_password', $result->password);
 
-                return redirect('/welcome');
+                return redirect('/pasien/home1');
             } else {
                 return redirect('/pasien/login')->with('error', 'Email atau Password salah,harap masukkan ulang!');
             }
