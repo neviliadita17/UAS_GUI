@@ -27,10 +27,16 @@ Route::post('/pasien/register/action', 'AuthC@registerAction');
 // //Login, Register, Logout Pegawai
 Route::get('/pegawai/login', 'AuthC@loginPegawai');
 Route::post('/pegawai/login/action', 'AuthC@loginPegawaiAction');
-// Route::get('/pegawai/logout', 'AuthC@Pegawailogout');
+Route::get('/pegawai/logout', 'AuthC@logout');
 
 
 //------------------------ PEGAWAI ------------------------//
+// Pegawai
+Route::get('/pegawai/home', 'PegawaiC@index');
+Route::get('/pegawai/pasien-api', 'PegawaiC@jumlahPasienAPI');
+Route::get('/pegawai/poli-api', 'PegawaiC@jumlahPoliAPI');
+Route::get('/pegawai/antrian-api', 'PegawaiC@jumlahAntrianAPI');
+
 
 //Data Akun Pasien
 Route::get('/pegawai/akun-pasien', 'AkunPasienC@akunPasien');
@@ -38,7 +44,7 @@ Route::get('pegawai/akun-pasien/data-api', 'AkunPasienC@dataAPI');
 // Register Pasien from Pegawai
 Route::get('pegawai/akun-pasien/form-register', 'AkunPasienC@formRegister');
 Route::post('pegawai/akun-pasien/form-register/action', 'AkunPasienC@registerAction');
-Route::get('/pegawai/akun-pasien/edit/{nama_pasien}/{alamat}', 'AkunPasienC@editDataPasien');
+Route::get('/pegawai/akun-pasien/edit/{id}', 'AkunPasienC@editDataPasien');
 Route::post('/pegawai/akun-pasien/edit/action', 'AkunPasienC@editDataPasienAction');
 
 
