@@ -4,17 +4,15 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link rel="stylesheet" href="http://localhost:8000/assets/css/admin_style.css">
-    <script src="{{url('/assets/vue/vue.js')}}"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="{{url('/assets/css/admin_style.css')}}">
 </head>
 
 <body>
     <div class="topnav" id="myTopnav">
-        <img style="float:left;" src="../../img/logo.png" width="48px" height="48px">
-        <a style="background-color:inherit; color:inherit;" href="#home">Puskesmas</a>
-        <a style="background-color:red; color:inherit; float:right;" class="blogout" href="">
-            <img class="imglogout" src="../../img/logout.png">
+        <img style="float:left;" src="{{url('/img/logo.png')}}" width="48px" height="48px">
+        <a style="background-color:inherit; color:inherit;">Puskesmas</a>
+        <a style="background-color:red; color:inherit; float:right;" class="blogout" href="{{url('/pegawai/logout')}}">
+            <img class="imglogout" src="{{url('/img/logout.png')}}">
             <div class="logout">LOGOUT</div>
         </a>
 
@@ -35,7 +33,7 @@
             <hr></a>
     </div>
 
-    
+
 </body>
 <script>
     function openNav() {
@@ -58,45 +56,6 @@
             x.className = "topnav";
         }
     }
-    new Vue({
-        el: '#app',
-        data: () => ({
-            search: null,
-            column: null,
-            items: []
-        }),
-        computed: {
-            cols() {
-                return this.items.length >= 1 ? Object.keys(this.items[0]) : []
-            },
-            rows() {
-                if (!this.items.length) {
-                    return []
-                }
-                return this.items.filter(item => {
-                    let props = (this.search && this.column) ? [item[this.column]] : Object.values(item)
-                    return props.some(prop => !this.search || ((typeof prop === 'string') ? prop
-                        .includes(this.search) : prop.toString(10).includes(this.search)))
-                })
-            }
-        },
-        methods: {
-            daftarAntrian(col) {
-                window.location.href = '/pegawai/antrian/add/' + col['Id'];
-            },
-            editDataPasien(col) {
-                window.location.href = '/pegawai/akun-pasien/edit/' + col['Id'];
-            },
-            upDate: function() {
-                axios.get('http://localhost:8000/pegawai/akun-pasien/data-api')
-                    .then(response => this.items = response.data['data'])
-            }
-        },
-        mounted() {
-            this.upDate();
-            this.timer = setInterval(this.upDate, 5000)
-        }
-    })
 </script>
 
 </html>

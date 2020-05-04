@@ -35,17 +35,21 @@
                     <table class="data_tb">
                         <thead>
                             <tr>
-                                <th>Nama Poli</th>
+                                <th width="20%">Nama Poli</th>
                                 <th>Deskripsi</th>
-                                <th>Gambar</th>
+                                <th width="15%">Gambar</th>
                                 <th width="10%">Menu</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="row in rows" :key="row.id">
                                 <td>@{{row['Nama Poli']}}</td>
-                                <td>@{{row['Deskripsi']}}</td>
-                                <td><img v-bind:src="row['Gambar']" alt="" style="height: 20%"></td>
+                                <td>
+                                    <div style="height:110px; overflow-y:auto;">
+                                        @{{row['Deskripsi']}}
+                                    </div>
+                                </td>
+                                <td style="text-align: center"><img v-bind:src="row['Gambar']" alt="" style="max-width: 100%;"></td>
                                 <td><a class="button buttonBlue" v-on:click="editPoli(row)">Edit</a></td>
                             </tr>
                         </tbody>

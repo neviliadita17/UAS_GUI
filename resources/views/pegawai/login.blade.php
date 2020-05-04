@@ -34,8 +34,6 @@
 
             <input id="submit-btn" type="submit" name="submit" value="LOGIN" />
 
-            <a href="#" id="signup">Klik disini untuk mendaftar</a>
-
     </div>
 
 

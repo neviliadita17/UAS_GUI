@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-12 col-s-12">
                     <h1>Antrian Pasien</h1>
-            
+
                 </div>
             </div>
         </div>
@@ -83,7 +83,6 @@
             x.className = "topnav";
         }
     }
-
     new Vue({
         el: '#app',
         data: () => ({
@@ -91,17 +90,6 @@
             column: null,
             items: []
         }),
-        beforeMount() {
-            this.items = Array.from(Array(20), (x, i) => {
-                return {
-                    No: i,
-                    'Nomor Antrian': Math.random().toString(36).substring(7),
-                    'Nama Pasien': Math.random().toString(36).substring(7),
-                    Poli: Math.random().toString(36).substring(7),
-                    Tanggal: Math.random().toString(36).substring(7)
-                }
-            })
-        },
         computed: {
             cols() {
                 return this.items.length >= 1 ? Object.keys(this.items[0]) : []
@@ -110,17 +98,13 @@
                 if (!this.items.length) {
                     return []
                 }
-
                 return this.items.filter(item => {
                     let props = (this.search && this.column) ? [item[this.column]] : Object.values(item)
-
-
                     return props.some(prop => !this.search || ((typeof prop === 'string') ? prop
                         .includes(this.search) : prop.toString(10).includes(this.search)))
                 })
             }
         },
-
         methods: {
             upDate: function() {
                 axios.get('http://localhost:8000/pegawai/antrian/data-api')
