@@ -280,7 +280,7 @@ html {
 
 /* Login Form */
 .login {
-    background: url('3568984.jpg');
+    background: url('../../img/3568984.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 150%;
@@ -746,7 +746,7 @@ select {
     position: absolute;
     border-radius: 5px;
     background-color: #ffffff;
-    background: url('4587.jpg');
+    background: url('../../img/4587.jpg');
     background-repeat: no-repeat;
     background-size: 50%;
     background-position: right;
@@ -891,14 +891,13 @@ select {
 /* Home Admin */
 
 .container_home {
-    position: absolute;
     border-radius: 5px;
     background-color: #ffffff;
-    background: url('3625753.jpg');
+    background: url('../../img/3625753.jpg');
     background-repeat: no-repeat;
     background-size: 50%;
-    background-position: right;
-    width: 95%;
+    background-position: left;
+    width: 100%;
 }
 
 .home_card {
@@ -911,11 +910,14 @@ select {
 }
 
 .card_time {
-    width: 50%;
+    width: 25%;
     height: 50%;
     padding: 10px 15px;
     border: 4px solid #BDBDBD;
     background-color: #F7FFF7;
+    min-width: 250px;
+    margin-left: 5%;
+    margin-right: auto;
 }
 
 /* --------------------------------------------------------------------------- */
