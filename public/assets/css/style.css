@@ -214,7 +214,7 @@ html {
 }
 
 .topnav a.atop:hover {
-    background-color: #ddd;
+    background-color: #5CB85C;
     color: black;
 }
 
@@ -556,8 +556,8 @@ button[type=submit]:hover {
     color: #fff;
     cursor: pointer;
     display: block;
-    width: 75%;
-    margin-left: 12%;
+    width: 50%;
+    margin-left: 25%;
     background: #6CAFEC;
     color: #fff;
     border-radius: 60px;
