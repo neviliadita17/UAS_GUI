@@ -5,74 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="{{url('/assets/css/style.css')}}">
-    <script src="vue.js"></script>
+    <script src="{{url('assets/vue/vue.js')}}"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 
 <body>
 
-    <div class="topnav" id="myTopnav">
-        <img style="float:left" src="logo.png" width="48px" height="48px">
-        <a class="atop" href="#" style="background-color:inherit; color:inherit;">Puskesmas</a>
-        <a class="atop" href="#home">Home</a>
-        <a class="atop" href="#pendaftaran">Pendaftaran Antrian</a>
-        <a class="atop" href="#about">Antrian Anda</a>
-        <a class="atop" href="#about">Riwayat Antrian</a>
-        <a class="atop" href="#about">Kontak</a>
-        <a style="background-color:red; color:inherit; float:right;" class="blogout" href="">
-            <img class="imglogout" src="logout.png">
-            <div class="logout">LOGOUT</div>
-        </a>
-        <a href="javascript:void(0);" class="icon" onclick="topNav()">
-            <i class="fa fa-bars"></i>
-        </a>
-    </div>
+    @include('navbar-after')
 
-    <div class="main" id="main" id="app">
+    <div class="main" id="main">
         <div class="back_antrian" id="card_antrian">
-            <div class="container" style="height: 100%;">
+            <div class="container" style="height: 100%;" id="app">
                 <h1 style="color: black;">Antrian</h1>
-                <div class="row">
+                <div class="row" v-for="row in rows" :key="row.id">
                     <div class="col-12">
                         <div id="home_data" class="antrian">
                             <span class="icon_status">
                                 <i class='fas fa-notes-medical' style='font-size:36px; margin: 20% 28%;'></i>
                             </span>
-                            <h4 style=" text-align: right;">Tanggal</h4>
-                            <h1>No Antrian : </h1>
-                            <h2 style=" text-align: center;">Nama Poli</h2>
+                            <h4 style=" text-align: right;">Tanggal : @{{row['Tanggal Antrian']}}</h4>
+                            <h1>No Antrian : @{{row['No Antrian']}}</h1>
+                            <h2 style=" text-align: center;">Nama Poli : @{{row['Poli']}}</h2>
                             <div class="row" style="text-align: center;">
-                                <button id="status_bt" type="button">Status</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div id="home_data" class="antrian">
-                            <span class="icon_status">
-                                <i class='fas fa-notes-medical' style='font-size:36px; margin: 20% 28%;'></i>
-                            </span>
-                            <h4 style=" text-align: right;">Tanggal</h4>
-                            <h1>No Antrian : </h1>
-                            <h2 style=" text-align: center;">Nama Poli</h2>
-                            <div class="row" style="text-align: center;">
-                                <button id="status_bt" type="button">Status</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div id="home_data" class="antrian">
-                            <span class="icon_status">
-                                <i class='fas fa-notes-medical' style='font-size:36px; margin: 20% 28%;'></i>
-                            </span>
-                            <h4 style=" text-align: right;">Tanggal</h4>
-                            <h1>No Antrian : </h1>
-                            <h2 style=" text-align: center;">Nama Poli</h2>
-                            <div class="row" style="text-align: center;">
-                                <button id="status_bt" type="button">Status</button>
+                                <button id="status_bt" type="button">@{{row['Status']}}</button>
                             </div>
                         </div>
                     </div>
@@ -102,6 +58,39 @@
             document.getElementById("card_antrian").style.marginTop = "80px";
         }
     };
+    new Vue({
+        el: "#app",
+        data: ({
+            search: null,
+            column: null,
+            items: []
+        }),
+        computed: {
+            cols() {
+                return this.items.length >= 1 ? Object.keys(this.items[0]) : []
+            },
+            rows() {
+                if (!this.items.length) {
+                    return []
+                }
+                return this.items.filter(item => {
+                    let props = (this.search && this.column) ? [item[this.column]] : Object.values(item)
+                    return props.some(prop => !this.search || ((typeof prop === 'string') ? prop
+                        .includes(this.search) : prop.toString(10).includes(this.search)))
+                })
+            }
+        },
+        methods: {
+            upDate: function() {
+                axios.get('http://localhost:8000/pasien/riwayat-api')
+                    .then(response => this.items = response.data['data'])
+            }
+        },
+        mounted() {
+            this.upDate();
+            this.timer = setInterval(this.upDate, 5000)
+        }
+    });
 </script>
 
 </html>

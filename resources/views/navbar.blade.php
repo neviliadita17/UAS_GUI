@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="{{url('/assets/css/style.css')}}">
-    <script src="vue.js"></script>
 </head>
 
 
@@ -22,19 +21,5 @@
     </div>
 
 </body>
-<script>
-    function topNav() {
-        var x = document.getElementById("myTopnav");
-        var y = document.getElementById("main");
-        if (x.className === "topnav") {
-            x.className += " responsive";
-            y.className = "";
-        } else {
-            x.className = "topnav";
-            y.className = "main";
-        }
-    }
-    });
-</script>
 
 </html>

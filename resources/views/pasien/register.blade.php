@@ -17,14 +17,10 @@
     <div class="container_r">
         <div class="col-12">
             <button class="btn btn-reverse btn-arrow btnbutton" style="float: right;">
-                <span>Back<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 36.1 25.8"
-                        enable-background="new 0 0 36.1 25.8" xml:space="preserve">
+                <span>Back<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 36.1 25.8" enable-background="new 0 0 36.1 25.8" xml:space="preserve">
                         <g>
-                            <line fill="none" stroke="#FFFFFF" stroke-width="3" stroke-miterlimit="10" x1="0" y1="12.9"
-                                x2="34" y2="12.9"></line>
-                            <polyline fill="none" stroke="#FFFFFF" stroke-width="3" stroke-miterlimit="10"
-                                points="22.2,1.1 34,12.9 22.2,24.7   "></polyline>
+                            <line fill="none" stroke="#FFFFFF" stroke-width="3" stroke-miterlimit="10" x1="0" y1="12.9" x2="34" y2="12.9"></line>
+                            <polyline fill="none" stroke="#FFFFFF" stroke-width="3" stroke-miterlimit="10" points="22.2,1.1 34,12.9 22.2,24.7   "></polyline>
                         </g>
                     </svg></span>
             </button>
@@ -35,8 +31,8 @@
 
             <div id="app">
                 <form method="POST" action="{{url('/pasien/register/action')}}" id="form_reg">
-                <input type="hidden" name="_token" value="{{csrf_token()}}">
-                
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" placeholder="Email" value="{{old('email')}}">
 
@@ -59,8 +55,7 @@
                     </select>
 
                     <label v-if="selected === 'Iya'" for="n_bpjs">Nomor BPJS</label>
-                    <input v-if="selected === 'Iya'" type="number" id="n_bpjs" name="n_bpjs"
-                        placeholder="Nomor BPJS ">
+                    <input v-if="selected === 'Iya'" type="number" id="n_bpjs" name="n_bpjs" placeholder="Nomor BPJS ">
 
                     <label for="st_p">Status Pasien</label>
                     <select id="st_p" name="st_p">
@@ -69,7 +64,7 @@
                     </select>
 
                     <button type="submit" name="submit" class="registerbtn" value="register"> Register</button>
-                    
+
                 </form>
             </div>
         </div>

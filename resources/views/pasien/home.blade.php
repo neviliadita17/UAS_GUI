@@ -11,24 +11,54 @@
 
 
 <body>
-
+    @if($session_a != "Guest")
+    @include('navbar-after')
+    @else
     @include('navbar')
+    @endif
 
-    <div class="main" id="main" id="app">
-        <div class="header" style="text-align: center;">
-            <div id="home_login" class="container">
-                <div class="row">
-                    <div class="col-6">
-                    <a href="{{url('pasien/login')}}" class="login_btn">LOGIN</a>
-
-                        <!-- <button id="home_btn" type="button">LOGIN</button>
-                        <a class="home_button" href="{{url('pasien/login')}}">LOGIN</a></span>
-                        <button type="submit" name="submit" href="{{url('pasien/login')}}">LOGIN</button> -->
+    <div class="main" id="main">
+        <div class="header" style="text-align: center;" id="head">
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <div v-if="akun === 'Guest'" id="home_login" class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <a style="text-decoration: none;" href="{{url('pasien/login')}}" class="login_btn">LOGIN</a>
+                            </div>
+                            <div class="col-6">
+                                <a style="text-decoration: none;" href="{{url('pasien/register')}}" class="login_btn">Register</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-6">
-                    <a href="{{url('pasien/register')}}" class="login_btn">Register</a>
-                        <!-- <a class="login_button" href="{{url('pasien/register')}}">REGISTER</a></span> -->
-                        <!-- <button type="submit" href="{{url('pasien/register')}}">REGISTER</button> -->
+                    <div v-if="akun !== 'Guest'" id="home_data" style="padding:10px; background-color: black; background-image: url(/img/573798-PLOMH2-538.jpg); background-size: cover;">
+                        <div>
+                            @if($session_a != "Guest")
+                            <div class="col-12" style="text-align: left;">
+                                <h1 style="color: #272636">Data Pasien</h1>
+                                <table>
+                                    <tr style="color: #272636">
+                                        <td>Nama</td>
+                                        <td> {{$tb_pasien->nama_pasien}}</td>
+                                    </tr>
+                                    <tr style="color: #272636">
+                                        <td>NRM</td>
+                                        <td> {{$tb_pasien->n_rm}}</td>
+                                    </tr>
+                                    <tr style="color: #272636">
+                                        <td>Tanggal Lahir</td>
+                                        <td> {{$tb_pasien->tl}}</td>
+                                    </tr>
+                                    <tr style="color: #272636">
+                                        <td>Alamat</td>
+                                        <td> {{$tb_pasien->alamat}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <button id="status_btn" type="button">Status</button>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
@@ -43,8 +73,7 @@
                     <div class="col-4">
                         <div>
                             <div>
-                                <input class="search_bar" id="search" type="text" placeholder="Search Poli..."
-                                    v-model="search">
+                                <input class="search_bar" id="search" type="text" placeholder="Search Poli..." v-model="search">
                             </div>
                         </div>
                     </div>
@@ -55,11 +84,12 @@
             </div>
             <div class="col-10 col-s-6" id="poli">
                 <div id="home_card" class="card" style="width: 18rem;" v-for="row in rows" :key="row.id">
-                    <img v-bind:src="row.gambar_poli" alt="Avatar" style="width:100%">
+                    <div v-bind:style="{ 'background-image': 'url(' + row.gambar_poli + ')' }" style="max-height:288px; min-height:288px; background-size: cover; background-position: center; background-repeat: no-repeat;">
+                    </div>
                     <div class="container" style="overflow-y: auto;">
                         <h4><b>@{{row['nama_poli']}}</b></h4>
                         <p>@{{row['deskripsi']}}</p>
-                        <button type="button" href="">Lihat Poli</button>
+                        <button type="button" v-on:click="detailPoli(row)">Lihat Poli</button>
                     </div>
                 </div>
             </div>
@@ -110,6 +140,9 @@
             }
         },
         methods: {
+            detailPoli(col) {
+                window.location.href = '/pasien/detail-poli/' + col.id_poli;
+            },
             upDate: function() {
                 axios.get('http://localhost:8000/pasien/home-api')
                     .then(response => this.items = response.data['data'])
@@ -118,6 +151,12 @@
         mounted() {
             this.upDate();
             this.timer = setInterval(this.upDate, 5000)
+        }
+    });
+    new Vue({
+        el: '#head',
+        data: {
+            akun: '{{ $session_a }}'
         }
     });
 </script>
