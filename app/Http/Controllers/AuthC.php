@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use DB;
-use App\Quotation;
-use App\ModelUser;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 
@@ -45,7 +41,7 @@ class AuthC extends Controller
                 $request->session()->put('s_n_bpjs', $result->n_bpjs);
                 $request->session()->put('s_password', $result->password);
 
-                return redirect('/pasien/home1');
+                return redirect('/');
             } else {
                 return redirect('/pasien/login')->with('error', 'Email atau Password salah,harap masukkan ulang!');
             }
