@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('/welcome');
-});
 
 //Login,Register,Logout Pasien
 Route::get('/pasien/login', 'AuthC@login');
@@ -24,19 +21,43 @@ Route::get('/pasien/register', 'AuthC@register');
 Route::post('/pasien/register/action', 'AuthC@registerAction');
 // Route::get('/pasien/logout', 'AuthC@logout');
 
+//Home Pasien
+// Route::get('/pasien/home', 'PasienC@index');
+Route::get('/', 'PasienC@index');
+Route::get('/pasien/home-api', 'PasienC@dataPoliApi');
+Route::get('/pasien/detail-poli/{id}', 'PasienC@detailPoli');
+Route::get('/detail', 'PasienC@showDetail');
+
+
+// Antrian
+Route::post('/pasien/daftar-antrian', 'PasienC@daftarAntrian');
+Route::get('/pasien/antrian-api', 'PasienC@dataAntrianAPI');
+Route::get('/pasien/antrian', 'PasienC@antrian');
+Route::post('/pasien/delete-antrian', 'PasienC@deleteAntrian');
+Route::post('/pasien/konfirmasi-antrian', 'PasienC@konfirmasiAntrian');
+
+// Riwayat
+Route::get('/pasien/riwayat-api', 'PasienC@dataRiwayatAPI');
+Route::get('/pasien/riwayat-antrian', 'PasienC@riwayat');
+
+
+//Halaman Poli Pasien
+Route::get('/pasien/poli', 'PasienC@poliIndex');
+
+
+//------------------------ PEGAWAI ------------------------//
+
+//Login Pegawai
 // //Login, Register, Logout Pegawai
 Route::get('/pegawai/login', 'AuthC@loginPegawai');
 Route::post('/pegawai/login/action', 'AuthC@loginPegawaiAction');
 Route::get('/pegawai/logout', 'AuthC@logout');
 
-
-//------------------------ PEGAWAI ------------------------//
-// Pegawai
+// Home Pegawai
 Route::get('/pegawai/home', 'PegawaiC@index');
 Route::get('/pegawai/pasien-api', 'PegawaiC@jumlahPasienAPI');
 Route::get('/pegawai/poli-api', 'PegawaiC@jumlahPoliAPI');
 Route::get('/pegawai/antrian-api', 'PegawaiC@jumlahAntrianAPI');
-
 
 //Data Akun Pasien
 Route::get('/pegawai/akun-pasien', 'AkunPasienC@akunPasien');
