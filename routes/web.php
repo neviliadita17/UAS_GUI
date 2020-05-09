@@ -19,7 +19,7 @@ Route::get('/pasien/login', 'AuthC@login');
 Route::post('/pasien/login/action', 'AuthC@loginAction');
 Route::get('/pasien/register', 'AuthC@register');
 Route::post('/pasien/register/action', 'AuthC@registerAction');
-// Route::get('/pasien/logout', 'AuthC@logout');
+Route::get('/pasien/logout', 'AuthC@Pasienlogout');
 
 //Home Pasien
 // Route::get('/pasien/home', 'PasienC@index');
