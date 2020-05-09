@@ -58,9 +58,7 @@
             </div>
         </div>
 
-        <div class="footer">
-            <p>&copy;copyright</p>
-        </div>
+        @include('footer')
 
     </div>
 </body>
