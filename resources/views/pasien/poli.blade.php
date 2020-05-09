@@ -77,7 +77,7 @@
 
 
 </body>
-@if($session_a != "Guest")
+
 <script>
     function topNav() {
         var x = document.getElementById("myTopnav");
@@ -90,6 +90,9 @@
             y.className = "main";
         }
     }
+</script>
+@if($session_a != "Guest")
+<script>
     new Vue({
         el: '#main',
         data: {
@@ -100,17 +103,6 @@
 </script>
 @else
 <script>
-    function topNav() {
-        var x = document.getElementById("myTopnav");
-        var y = document.getElementById("main");
-        if (x.className === "topnav") {
-            x.className += " responsive";
-            y.className = "";
-        } else {
-            x.className = "topnav";
-            y.className = "main";
-        }
-    }
     new Vue({
         el: '#main',
         data: {

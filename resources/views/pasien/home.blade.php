@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +18,7 @@
     @endif
 
     <div class="main" id="main">
-        <div class="header" style="text-align: center;" id="head">
+        <div style="text-align: center;" id="head">
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-10">
@@ -31,6 +31,7 @@
                                 <a style="text-decoration: none;" href="{{url('pasien/register')}}" class="login_btn">Register</a>
                             </div>
                         </div>
+                        <hr style="height: 5px; background-color: black; border: 5px;">
                     </div>
                     <div v-if="akun !== 'Guest'" id="home_data" style="padding:10px; background-color: black; background-image: url(/img/573798-PLOMH2-538.jpg); background-size: cover;">
                         <div>
@@ -56,7 +57,8 @@
                                     </tr>
                                 </table>
                             </div>
-                            <button id="status_btn" type="button">Status</button>
+                            <button v-if="antrian !== '0'" style="background-color: yellow; color: black;" class="status_btn" type="button">Dalam Antrian</button>
+                            <button v-if="antrian === '0'" class="status_btn" type="button">Tidak Dalam Antrian</button>
                             @endif
                         </div>
                     </div>
@@ -89,7 +91,7 @@
                     <div class="container" style="overflow-y: auto;">
                         <h4><b>@{{row['nama_poli']}}</b></h4>
                         <p>@{{row['deskripsi']}}</p>
-                        <button type="button" v-on:click="detailPoli(row)">Lihat Poli</button>
+                        <button class="poli_btn" v-on:click="detailPoli(row)">Lihat Poli</button>
                     </div>
                 </div>
             </div>
@@ -115,7 +117,7 @@
         }
     }
 
-    const app = new Vue({
+    new Vue({
         el: "#app",
         data: ({
             search: null,
@@ -132,8 +134,8 @@
                 }
                 return this.items.filter(item => {
                     let props = (this.search && this.column) ? [item[this.column]] : Object.values(item)
-                    return props.some(prop => !this.search || ((typeof prop === 'string') ? prop
-                        .includes(this.search) : prop.toString(10).includes(this.search)))
+                    return props.some(prop => !this.search || ((typeof prop === 'string') ? prop.toLowerCase()
+                        .includes(this.search.toLowerCase()) : prop.toString(10).includes(this.search)))
                 })
             }
         },
@@ -151,6 +153,19 @@
             this.timer = setInterval(this.upDate, 5000)
         }
     });
+</script>
+@if($session_a != "Guest")
+<script>
+    new Vue({
+        el: '#head',
+        data: {
+            akun: '{{ $session_a }}',
+            antrian: '{{$antrian->antrian}}'
+        }
+    });
+</script>
+@else
+<script>
     new Vue({
         el: '#head',
         data: {
@@ -158,5 +173,6 @@
         }
     });
 </script>
+@endif
 
 </html>

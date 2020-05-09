@@ -65,7 +65,7 @@
             </div>
         </div>
 
-                @include('footer')
+        @include('footer')
 
 
     </div>
@@ -108,8 +108,8 @@
                 }
                 return this.items.filter(item => {
                     let props = (this.search && this.column) ? [item[this.column]] : Object.values(item)
-                    return props.some(prop => !this.search || ((typeof prop === 'string') ? prop
-                        .includes(this.search) : prop.toString(10).includes(this.search)))
+                    return props.some(prop => !this.search || ((typeof prop === 'string') ? prop.toLowerCase()
+                        .includes(this.search.toLowerCase()) : prop.toString(10).includes(this.search)))
                 })
             }
         },

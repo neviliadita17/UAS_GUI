@@ -32,14 +32,14 @@
                                     <form action="{{url('/pasien/delete-antrian')}}" method="POST">
                                         {{csrf_field()}}
                                         <input type="hidden" name="id" :value="row['Id']">
-                                        <button style="background-color: red;" id="status_bt" type="submit">Batal</button>
+                                        <button style="background-color: red;" class="status_btn" type="submit">Batal</button>
                                     </form>
                                 </div>
                                 <div class="col-6">
                                     <form action="{{url('/pasien/konfirmasi-antrian')}}" method="POST">
                                         {{csrf_field()}}
                                         <input type="hidden" name="id" :value="row['Id']">
-                                        <button style="background-color: green;;" id="status_bt" type="submit">Selesai</button>
+                                        <button style="background-color: green;" class="status_btn" type="submit">Selesai</button>
                                     </form>
                                 </div>
                                 <br>

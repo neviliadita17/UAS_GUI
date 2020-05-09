@@ -17,7 +17,7 @@
     <div class="main" id="main">
         <div class="back_antrian" id="card_antrian">
             <div class="container" style="height: 100%;" id="app">
-                <h1 style="color: black;">Antrian</h1>
+                <h1 style="color: black;">Riwayat Antrian</h1>
                 <div class="row" v-for="row in rows" :key="row.id">
                     <div class="col-12">
                         <div id="home_data" class="antrian">
@@ -28,7 +28,7 @@
                             <h1>No Antrian : @{{row['No Antrian']}}</h1>
                             <h2 style=" text-align: center;">Nama Poli : @{{row['Poli']}}</h2>
                             <div class="row" style="text-align: center;">
-                                <button id="status_bt" type="button">@{{row['Status']}}</button>
+                                <button class="status_btn" type="button">@{{row['Status']}}</button>
                             </div>
                         </div>
                     </div>

@@ -11,7 +11,7 @@
 <body>
 
     <div class="topnav" id="myTopnav">
-        <img style="float:left" src="{{url('/img/logo.png')}}" width="48px" height="48px">
+        <img style="float:left" src="{{url('/img/logo.png')}}" width="50px" height="50px">
         <a class="atop" style="background-color:inherit; color:inherit;">Puskesmas</a>
         <a class="atop" href="{{url('/')}}">Home</a>
         <a class="atop" href="{{url('/pasien/antrian')}}">Antrian Anda</a>
