@@ -55,9 +55,7 @@
 
     </div>
 
-    <div class="footer" style="position: fixed;">
-        <p>@Copyright</p>
-    </div>
+    @include('footer')
 
 </body>
 <script>
