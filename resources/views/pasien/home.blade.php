@@ -99,9 +99,7 @@
         </div>
     </div>
 
-    <div class="footer">
-        <p>@Copyright</p>
-    </div>
+    @include('footer')
 
 </body>
 <script>
