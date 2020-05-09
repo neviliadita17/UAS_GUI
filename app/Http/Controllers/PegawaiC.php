@@ -7,9 +7,13 @@ use Illuminate\Support\Facades\DB;
 
 class PegawaiC extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('pegawai/pegawai');
+        if($request->session()->get('s_nama_peg') == null){
+            return redirect('/pegawai/login');
+        }else{
+            return view('pegawai/pegawai');
+        }
     }
 
     public function jumlahPasienAPI()

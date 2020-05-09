@@ -8,10 +8,14 @@ use Illuminate\Support\Facades\DB;
 class PoliManajemenC extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+        if($request->session()->get('s_nama_peg') == null){
+            return redirect('/pegawai/login');
+        }else{
         $poli = DB::table('tb_poli')->get();
         return view('pegawai/poli/poli', ['tb_poli' => $poli]);
+        }
     }
 
     public function poliAPI()
@@ -20,11 +24,15 @@ class PoliManajemenC extends Controller
         return response(['data' => $item]);
     }
 
-    public function poliAdd()
+    public function poliAdd(Request $request)
     {
+        if($request->session()->get('s_nama_peg') == null){
+            return redirect('/pegawai/login');
+        }else{
         $data['title'] = "Pegawai - Add Poli";
         $data['tb_poli'] = DB::select("SELECT * FROM tb_poli");
         return view('pegawai/poli/poli_add', $data);
+        }
     }
 
     public function poliAddAction(Request $request)
@@ -46,10 +54,14 @@ class PoliManajemenC extends Controller
         }
     }
 
-    public function poliEdit($id)
+    public function poliEdit(Request $request,$id)
     {
+        if($request->session()->get('s_nama_peg') == null){
+            return redirect('/pegawai/login');
+        }else{
         $poli = DB::table('tb_poli')->where('id_poli', $id)->first();
         return view('pegawai/poli/poli_edit', ['tb_poli' => $poli]);
+        }
     }
 
     public function poliEditAction(Request $request)

@@ -7,11 +7,15 @@ use Illuminate\Support\Facades\DB;
 
 class AkunPasienC extends Controller
 {
-    public function akunPasien()
+    public function akunPasien(Request $request)
     {
-        $item = DB::table('tb_pasien')->get();
-        $data['jumlah'] = DB::selectOne("SELECT COUNT(id_pasien) AS j_pasien FROM  tb_pasien");
-        return view('pegawai/akun_pasien/akun_pasien', ['item' => $item], $data);
+        if($request->session()->get('s_nama_peg') == null){
+            return redirect('/pegawai/login');
+        }else{
+            $item = DB::table('tb_pasien')->get();
+            $data['jumlah'] = DB::selectOne("SELECT COUNT(id_pasien) AS j_pasien FROM  tb_pasien");
+            return view('pegawai/akun_pasien/akun_pasien', ['item' => $item], $data);
+        }
     }
 
     public function dataAPI()
@@ -26,7 +30,11 @@ class AkunPasienC extends Controller
 
     public function formRegister()
     {
-        return view('pegawai/akun_pasien/register');
+        if($request->session()->get('s_nama_peg') == null){
+            return redirect('/pegawai/login');
+        }else{
+            return view('pegawai/akun_pasien/register');
+        }
     }
 
     public function registerAction(Request $request)
@@ -92,10 +100,14 @@ class AkunPasienC extends Controller
         }
     }
 
-    public function editDataPasien($id)
+    public function editDataPasien(Request $request,$id)
     {
-        $tb_pasien = DB::table('tb_pasien')->where('id_pasien', $id)->get();
-        return view('pegawai/akun_pasien/akun_pasien_edit', ['tb_pasien' => $tb_pasien]);
+        if($request->session()->get('s_nama_peg') == null){
+            return redirect('/pegawai/login');
+        }else{
+            $tb_pasien = DB::table('tb_pasien')->where('id_pasien', $id)->get();
+            return view('pegawai/akun_pasien/akun_pasien_edit', ['tb_pasien' => $tb_pasien]);
+        }
     }
 
     public function editDataPasienAction(Request $request)

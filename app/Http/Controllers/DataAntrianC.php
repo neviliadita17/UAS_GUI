@@ -8,10 +8,14 @@ use Illuminate\Support\Facades\DB;
 class DataAntrianC extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $data['antrian'] = DB::table('tb_antrian')->get();
-        return view('pegawai/antrian/antrian', ['tb_antrian' => $data]);
+        if($request->session()->get('s_nama_peg') == null){
+            return redirect('/pegawai/login');
+        }else{
+            $data['antrian'] = DB::table('tb_antrian')->get();
+            return view('pegawai/antrian/antrian', ['tb_antrian' => $data]);
+        }
     }
 
     public function dataAPIPasien()
@@ -20,19 +24,23 @@ class DataAntrianC extends Controller
                             tb_poli.nama_poli AS 'Poli', DATE_FORMAT(tgl_a, '%d-%M-%Y') AS 'Tanggal Antrian',
                             status AS 'Status' FROM tb_antrian
                             JOIN tb_pasien ON tb_antrian.id_pasien= tb_pasien.id_pasien
-                            JOIN tb_poli ON tb_antrian.id_poli = tb_poli.id_poli ORDER BY tb_antrian.tgl_a DESC", []);
+                            JOIN tb_poli ON tb_antrian.id_poli = tb_poli.id_poli GROUP BY tb_poli.nama_poli ORDER BY tb_antrian.tgl_a DESC", []);
         return response(['data' => $item]);
     }
 
-    public function dataAntrianAdd($id)
+    public function dataAntrianAdd(Request $request,$id)
     {
-        $data['title'] = "Pegawai - Add Antrian";
-        $data['tb_antrian'] = DB::select("SELECT * FROM tb_antrian");
-        $data['tb_pasien'] = DB::select("SELECT *, DATE_FORMAT(tgl_lahir, '%d-%M-%Y') AS 'tl' FROM tb_pasien WHERE id_pasien = ?", [
-            $id
-        ]);
-        $data['tb_poli'] = DB::select("SELECT * FROM tb_poli");
-        return view('pegawai/antrian/antrian_add', $data);
+        if($request->session()->get('s_nama_peg') == null){
+            return redirect('/pegawai/login');
+        }else{
+            $data['title'] = "Pegawai - Add Antrian";
+            $data['tb_antrian'] = DB::select("SELECT * FROM tb_antrian");
+            $data['tb_pasien'] = DB::select("SELECT *, DATE_FORMAT(tgl_lahir, '%d-%M-%Y') AS 'tl' FROM tb_pasien WHERE id_pasien = ?", [
+                $id
+            ]);
+            $data['tb_poli'] = DB::select("SELECT * FROM tb_poli");
+            return view('pegawai/antrian/antrian_add', $data);
+        }
     }
 
     public function dataAntrianAddAction(Request $request)

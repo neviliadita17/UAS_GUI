@@ -20,6 +20,9 @@ class PasienC extends Controller
             $data['tb_pasien'] = DB::selectOne("SELECT *, DATE_FORMAT(tgl_lahir, '%d-%M-%Y') AS 'tl' FROM tb_pasien WHERE id_pasien = ?", [
                 $request->session()->get('s_id_pasien')
             ]);
+            $data['antrian'] = DB::selectOne("SELECT COUNT(id_a) AS antrian FROM tb_antrian WHERE id_pasien = ? AND status = 'Antri'", [
+                $request->session()->get('s_id_pasien')
+            ]);
         } else {
             $session_a = "Guest";
         }
@@ -27,27 +30,11 @@ class PasienC extends Controller
         return view('pasien/home', ['session_a' => $session_a], $data);
     }
 
-
-    // public function home1() {
-    //     // $data['title'] = "Home - Puskesmas";
-    //     // $data['tb_pasien']= DB::select("SELECT * FROM tb_pasien WHERE id_pasien=?", $data['id_pasien']);
-    //     // // $data['tb_pasien'] = DB::select("SELECT *, DATE_FORMAT(tgl_lahir, '%d-%M-%Y') AS 'tl' FROM tb_pasien WHERE id_pasien = ?", [$id]);
-    //     // return view('pasien/home1', $data);
-
-    // }
-
     public function dataPoliAPI()
     {
         $item = DB::select("SELECT * FROM tb_poli", []);
         return response(['data' => $item]);
     }
-
-    // public function poliIndex()
-    // {
-    //     $data['title'] = "Poli - Puskesmas";
-    //     $data['tb_poli'] = DB::select("SELECT * FROM tb_poli WHERE id_poli=?", [$tb_poli->id_poli]);
-    //     return view('pasien/poli', $data);
-    // }
 
     public function detailPoli(Request $request, $id)
     {
