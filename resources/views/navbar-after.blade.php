@@ -13,12 +13,10 @@
     <div class="topnav" id="myTopnav">
         <img style="float:left" src="{{url('/img/logo.png')}}" width="48px" height="48px">
         <a class="atop" style="background-color:inherit; color:inherit;">Puskesmas</a>
-        <a class="atop" href="{{url('/pasien/home')}}">Home</a>
-        <a class="atop" href="{{url('/pasien/pendaftaran')}}">Pendaftaran Antrian</a>
+        <a class="atop" href="{{url('/')}}">Home</a>
         <a class="atop" href="{{url('/pasien/antrian')}}">Antrian Anda</a>
         <a class="atop" href="{{url('/pasien/riwayat-antrian')}}">Riwayat Antrian</a>
-        <a class="atop" href="{{url('/pasien/kontak')}}">Kontak</a>
-        <a style="background-color:red; color:inherit; float:right;" class="blogout" href="">
+        <a style="background-color:red; color:inherit; float:right;" class="blogout" href="{{url('/pasien/logout')}}">
             <img class="imglogout" src="{{url('/img/logout.png')}}">
             <div class="logout">LOGOUT</div>
         </a>
