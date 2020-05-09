@@ -163,4 +163,9 @@ class AuthC extends Controller
         Session::flush();
         return redirect('/pegawai/login')->with('warning', 'Kamu berhasil logout');
     }
+    
+    public function Pasienlogout(Request $request){
+        Session::flush();
+        return redirect('/');
+    }
 }
