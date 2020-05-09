@@ -13,8 +13,7 @@
     <div class="topnav" id="myTopnav">
         <img style="float:left" src="{{url('/img/logo.png')}}" width="48px" height="48px">
         <a class="atop" style="background-color:inherit; color:inherit;">Puskesmas</a>
-        <a class="atop" href="{{url('/pasien/home')}}">Home</a>
-        <a class="atop" href="{{url('/pasien/kontak')}}">Kontak</a>
+        <a class="atop" href="{{url('/')}}">Home</a>
         <a href="javascript:void(0);" class="icon" onclick="topNav()">
             <i class="fa fa-bars"></i>
         </a>
