@@ -9,9 +9,9 @@ class AkunPasienC extends Controller
 {
     public function akunPasien(Request $request)
     {
-        if($request->session()->get('s_nama_peg') == null){
+        if ($request->session()->get('s_nama_peg') == null) {
             return redirect('/pegawai/login');
-        }else{
+        } else {
             $item = DB::table('tb_pasien')->get();
             $data['jumlah'] = DB::selectOne("SELECT COUNT(id_pasien) AS j_pasien FROM  tb_pasien");
             return view('pegawai/akun_pasien/akun_pasien', ['item' => $item], $data);
@@ -28,11 +28,11 @@ class AkunPasienC extends Controller
         return response(['data' => $item]);
     }
 
-    public function formRegister()
+    public function formRegister(Request $request)
     {
-        if($request->session()->get('s_nama_peg') == null){
+        if ($request->session()->get('s_nama_peg') == null) {
             return redirect('/pegawai/login');
-        }else{
+        } else {
             return view('pegawai/akun_pasien/register');
         }
     }
@@ -63,7 +63,7 @@ class AkunPasienC extends Controller
                     $request->input('alamat'),
                     $request->input('tgl_lahir'),
                     $request->input('st_p'),
-                    "Nomor Rekam Medis Sudah Terdaftar",
+                    $request->input('n_rm'),
                     $request->input('st_bpjs'),
                     $request->input('no_bpjs')
                 ]);
@@ -76,7 +76,7 @@ class AkunPasienC extends Controller
                     $request->input('alamat'),
                     $request->input('tgl_lahir'),
                     $request->input('st_p'),
-                    "Nomor Rekam Medis Sudah Terdaftar",
+                    $request->input('n_rm'),
                     $request->input('st_bpjs'),
                     "Tidak Terdaftar Sepagai Pasien BPJS"
                 ]);
@@ -100,11 +100,11 @@ class AkunPasienC extends Controller
         }
     }
 
-    public function editDataPasien(Request $request,$id)
+    public function editDataPasien(Request $request, $id)
     {
-        if($request->session()->get('s_nama_peg') == null){
+        if ($request->session()->get('s_nama_peg') == null) {
             return redirect('/pegawai/login');
-        }else{
+        } else {
             $tb_pasien = DB::table('tb_pasien')->where('id_pasien', $id)->get();
             return view('pegawai/akun_pasien/akun_pasien_edit', ['tb_pasien' => $tb_pasien]);
         }
