@@ -50,23 +50,22 @@
                     <input type="date" id="tgl_lahir" name="tgl_lahir" value="{{ $pasien->tgl_lahir }}" required></input>
 
                     <label for="st_bpjs">Status BPJS</label>
-                    <select id="st_bpjs" name="st_bpjs" v-model="selected" required>
+                    <select id="st_bpjs" name="st_bpjs" v-model="bpjs" required>
                         <option value="Tidak">Tidak</option>
                         <option value="Iya">Iya</option>
                     </select>
 
-                    <label v-if="selected === 'Iya'" for="n_bpjs">Nomor BPJS</label>
-                    <input v-if="selected === 'Iya'" type="number" id="no_bpjs" name="no_bpjs" placeholder="Nomor BPJS " value="{{ $pasien->n_bpjs }}" required>
+                    <label v-if="bpjs === 'Iya'" for="n_bpjs">Nomor BPJS</label>
+                    <input v-if="bpjs === 'Iya'" type="number" id="no_bpjs" name="no_bpjs" placeholder="Nomor BPJS " value="{{ $pasien->n_bpjs }}" required>
 
-                    <label for="st_p">Status Pasien</label>
-                    <select id="st_p" name="st_p" v-model="selectedrm" required>
+                    <select id="st_pasien" name="st_p" v-model="pasien">
                         <option value="Baru">Baru</option>
                         <option value="Lama">Lama</option>
                     </select>
-
-                    <label v-if="selectedrm === 'Baru'" for="n_rm">Tambahkan Nomor Rekam Medis dengan Merubah Status Pasien <br><br></label>
-                    <label v-if="selectedrm === 'Lama'" for="n_rm">Nomor Rekam Medis</label>
-                    <input v-if="selectedrm === 'Lama'" type="number" id="n_rm" name="n_rm" placeholder="Nomor Rekam Medis " value="{{ $pasien->n_rm }}" required>
+                    <label v-if="pasien === 'Baru'" for="" style="color:red;">*Tambahkan nomor rekam medis dengan rubah status pasien ke lama<br><br></label>
+                    <label v-if="pasien === 'Lama'" for="" style="color:red;">*Tambahkan atau cari pada data lama nomor rekam medis pasien<br></label>
+                    <label v-if="pasien === 'Lama'" for="nrm">Nomor Rekam Medis</label>
+                    <input v-if="pasien === 'Lama'" type="number" id="n_rm" name="n_rm" value="{{ $pasien->n_rm }}" required>
 
                     <button type="submit" class="registerbtn" value="Submit"> Edit</button>
                 </form>
@@ -81,8 +80,8 @@
     new Vue({
         el: '#app',
         data: {
-            selected: '{{ $pasien->status_bpjs }}',
-            selectedrm: '{{ $pasien->status_pasien }}'
+            bpjs: '{{ $pasien->status_bpjs }}',
+            pasien: '{{ $pasien->status_pasien }}'
         }
     });
 </script>

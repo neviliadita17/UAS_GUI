@@ -33,13 +33,13 @@
                 <form action="{{url('pegawai/akun-pasien/form-register/action')}}" id="form_reg" method="POST">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Email Anda">
+                    <input type="email" id="email" name="email" placeholder="Email Pasien">
 
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" placeholder="Password">
 
                     <label for="nama">Nama Lengkap</label>
-                    <input type="text" id="nama" name="nama" placeholder="Nama Lengkap Anda">
+                    <input type="text" id="nama" name="nama" placeholder="Nama Lengkap Pasien">
 
                     <label for="alamat">Alamat</label>
                     <textarea name="alamat" id="" cols="30" rows="10" placeholder="Alamat "></textarea>
@@ -48,19 +48,23 @@
                     <input type="date" id="tgl_lahir" name="tgl_lahir"></input>
 
                     <label for="st_bpjs">Status BPJS</label>
-                    <select id="st_bpjs" name="st_bpjs" v-model="selected">
+                    <select id="st_bpjs" name="st_bpjs" v-model="bpjs">
                         <option value="Tidak">Tidak</option>
                         <option value="Iya">Iya</option>
                     </select>
 
-                    <label v-if="selected === 'Iya'" for="no_bpjs">Nomor BPJS</label>
-                    <input v-if="selected === 'Iya'" type="number" id="no_bpjs" name="no_bpjs" placeholder="Nomor BPJS ">
+                    <label v-if="bpjs === 'Iya'" for="no_bpjs">Nomor BPJS</label>
+                    <input v-if="bpjs === 'Iya'" type="number" id="no_bpjs" name="no_bpjs" placeholder="Nomor BPJS ">
+                    <label for="st_bpjs">Status BPJS</label>
 
-                    <label for="st_p">Status Pasien</label>
-                    <select id="st_p" name="st_p">
+                    <select id="st_pasien" name="st_p" v-model="pasien">
                         <option value="Baru">Baru</option>
                         <option value="Lama">Lama</option>
                     </select>
+                    <label v-if="pasien === 'Baru'" for="" style="color:red;">*Tambahkan nomor rekam medis dengan rubah status pasien ke lama<br><br></label>
+                    <label v-if="pasien === 'Lama'" for="" style="color:red;">*Tambahkan atau cari pada data lama nomor rekam medis pasien<br></label>
+                    <label v-if="pasien === 'Lama'" for="nrm">Nomor Rekam Medis</label>
+                    <input v-if="pasien === 'Lama'" type="text" id="n_rm" name="n_rm" placeholder="Nomor Rekam Medis">
 
                     <button type="submit" class="registerbtn" value="Submit"> Register</button>
                 </form>
@@ -73,7 +77,8 @@
     new Vue({
         el: '#app',
         data: {
-            selected: 'Tidak'
+            bpjs: 'Tidak',
+            pasien: 'Baru'
         }
     });
 </script>
